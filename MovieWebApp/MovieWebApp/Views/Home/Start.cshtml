@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Start";
+}
+
+<style>
+    /* 전체 페이지 스타일링 */
+    body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden; /* 스크롤바 숨김 */
+    }
+
+    /* 비디오 스타일링 */
+    video {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* 비디오 비율 유지하면서 화면 꽉 채움 */
+    }
+</style>
+
+<video controls="controls" autoplay onended="redirectToIndex()">
+    <source src="~/images/viewtiful.mp4" type="video/mp4" />
+</video>
+
+<script>
+    function redirectToIndex() {
+        // 비디오 재생이 끝나면 index.cshtml로 리디렉트
+        window.location.href = 'Home/Index';
+    }
+</script>
+
+
+
+
+

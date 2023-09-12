@@ -1,0 +1,138 @@
+﻿@model MovieReviewViewModel
+
+@{
+    ViewData["Title"] = "Movie Detail";
+}
+<style>
+    body {
+        background-color: black;
+        color: white;
+    }
+</style>
+
+<style>
+    #ex1 {
+        font-weight: bold;
+    }
+</style>
+<div>
+    <hr style="margin-bottom: 30px;">
+    <dl class="row form-horizontal">
+        <dd class="col-sm-10 text-center">
+            <!-- 비디오를 가운데 정렬하기 위해 text-center 클래스 추가 -->
+            <video width="1200" height="500" controls style="display: block; margin: 0 auto;">
+                <!-- 비디오 가로 중앙 정렬 스타일 추가 -->
+                <source src="data:video/mp4;base64,@Convert.ToBase64String(Model.Movie.Video)" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <br />
+        </dd>
+        <dd class="col-sm-10 text-left" style="font-size: 50px">
+            <strong>@Html.DisplayFor(model => model.Movie.Title)</strong>
+            <button id="heartButton" class="btn btn-light" onclick="toggleFavorite()" style="font-size: 20px">❤️ 찜하기</button>
+            <br />
+        </dd>
+        <dd class="col-sm-11 text-left">
+            @Html.DisplayFor(model => model.Movie.Contents)
+        </dd>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <hr style="background-color: white;">
+        <br />
+        <br />
+        <dd style="font-size: 35px" id="ex1">상세정보</dd>
+        <dd class="col-sm-10 text-left">
+            <span style="color: gray;">장르 :</span> @Html.DisplayFor(model => model.Movie.Genre)
+        </dd>
+        <dd class="col-sm-10 text-left">
+            <span style="color: gray;">관람등급 :</span>   @Html.DisplayFor(model => model.Movie.Age)
+        </dd>
+        <dd class="col-sm-10 text-left">
+            <span style="color: gray;">개봉일자 :</span>    @Html.DisplayFor(model => model.Movie.Year)
+
+        </dd>
+        <dd class="col-sm-10 text-left">
+            <span style="color: gray;">관람객 수 :</span>     @Html.DisplayFor(model => model.Movie.Views)
+        </dd>
+    </dl>
+</div>
+<br />
+<hr style="background-color: white;">
+<br />
+
+
+<h2 style="font-size: 35px" id="ex1">REVIEW</h2>
+@foreach (var review in Model.Reviews)
+{
+    <!-- review 객체에 대한 null 검사 추가 -->
+    @if (review != null)
+    {
+        <dd class="col-sm-10" text-left style="font-size:20px">
+            <strong>@Html.DisplayFor(model => review.Title)</strong>
+        </dd>
+        <dd></dd>
+        <dd></dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => review.Contents)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => review.Contents)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => review.Rate)
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                // 리뷰 객체에 대한 null 검사 추가
+                if (review.Rate != null)
+                {
+                    double rate = (double)review.Rate;
+                    for (var i = 1; i <= 5; i++)
+                    {
+                        if (i <= rate - 0.5)
+                        {
+                            <span class="star rated" data-rating="@i" style="color:yellow">&#9733;</span>
+                        }
+                        else if (i - 0.5 <= rate)
+                        {
+                            <span class="star rated-half" data-rating="@i">&#9734;</span>
+                            break; // 반 채워진 별 출력 후 종료
+                        }
+                        else
+                        {
+                            <span class="star" data-rating="@i">&#9734;</span>
+                            break; // 빈 별 출력 후 종료
+                        }
+                    }
+                    @Html.DisplayFor(model => review.Rate)
+                }
+            }
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => review.Date)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => review.Date)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => review.Writer)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => review.Writer)
+        </dd>
+    }
+}
+<br />
+<div>
+    <a asp-action="Reviewboard" asp-route-searchTerm="@Model.Movie.Title" class="btn btn-light">더 많은 리뷰 보기</a>
+</div>
+
+<script>
+    function toggleFavorite() {
+
+    }
+</script>

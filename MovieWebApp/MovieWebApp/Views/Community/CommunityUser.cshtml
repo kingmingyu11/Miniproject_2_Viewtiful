@@ -1,0 +1,74 @@
+﻿@model IEnumerable<MovieWebApp.Models.Community>
+
+@{
+    Layout = "User_Layout";
+}
+
+@{
+    ViewData["Title"] = "CommunityUser";
+}
+
+<h1>공지사항</h1>
+
+<style>
+    body {
+        background-color: black;
+        color: white;
+    }
+
+
+
+    table {
+        background-color: #ddd; /* 진한 회색 배경색으로 설정 */
+        color: white; /* 텍스트 색상을 흰색으로 설정 */
+    }
+        /* 마우스를 갖다 댔을 때 행의 배경색 변경 */
+        table tr:hover {
+            background-color: white;
+        }
+
+    }
+</style>
+
+<p>
+
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contents)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Writer)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Contents)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Writer)
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

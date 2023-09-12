@@ -1,0 +1,127 @@
+﻿@model IEnumerable<Review>
+
+@{
+    Layout = "Admin_Layout";
+    ViewData["Title"] = "Admin_Layout";
+}
+<style>
+    #ex1 {
+        font-weight: bold;
+    }
+</style>
+<style>
+    body {
+        background-color: black;
+        color: white;
+    }
+
+    table.table tbody tr td {
+        color: white;
+    }
+
+        table.table tbody tr td a {
+            color: white;
+        }
+</style>
+<p>
+    <a asp-action="Reviewenroll" class="btn btn-danger" id="ex1">리뷰 등록</a>
+</p>
+<div class="d-flex justify-content-end align-items-center">
+    <input type="text" id="searchBox" placeholder="제목을 입력해주세요." class="underline-input" style="background-color: black; color: white; width: 30%;" />
+    <div style="width: 10px;"></div> <!-- 간격을 조절하기 위한 빈 요소 추가 -->
+    <button id="searchButton" class="btn btn-light">Search</button>
+</div>
+<br />
+<br />
+<br />
+
+<table class="table">
+    <thead style="color:white">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contents)
+            </th>
+            <th>
+                Rate
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Writer)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="vertical-align: middle;">
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td style="vertical-align: middle;">
+                    @Html.DisplayFor(modelItem => item.Contents)
+                </td>
+                <td style="vertical-align: middle;">
+                    @{
+                        double rate = item.Rate;
+                        for (var i = 1; i <= 5; i++)
+                        {
+                            if (i <= rate - 0.5)
+                            {
+                                <span class="star rated" data-rating="@i" style="color:yellow">&#9733;</span>
+                            }
+                            else if (i - 0.5 <= rate)
+                            {
+                                <span class="star rated-half" data-rating="@i">&#9734;</span>
+                                break; // 반 채워진 별 출력 후 종료
+                            }
+                            else
+                            {
+                                <span class="star" data-rating="@i">&#9734;</span>
+                                break; // 빈 별 출력 후 종료
+                            }
+                        }
+                    }
+
+                </td>
+                <td style="vertical-align: middle;">
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td style="vertical-align: middle;">
+                    @Html.DisplayFor(modelItem => item.Writer)
+                </td>
+                <td>
+                    <a asp-action="ReviewEdit" asp-route-id="@item.Id" class="btn btn-light text-dark">리뷰 수정</a> |
+                    <a asp-action="ReviewDetails" asp-route-id="@item.Id" class="btn btn-light text-dark">리뷰 조회</a> |
+                    <a asp-action="ReviewDelete" asp-route-id="@item.Id" class="btn btn-light text-dark">리뷰 삭제</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#searchButton").on("click", function () {
+                // 검색어 입력 상자에서 검색어를 가져옴
+                var searchText = $("#searchBox").val().toLowerCase();
+
+                // 모든 행 숨김
+                $("tbody tr").hide();
+
+                // 검색어와 일치하는 항목을 보여줌
+                $("tbody tr").filter(function () {
+                    return $(this).text().toLowerCase().indexOf(searchText) > -1;
+                }).show();
+            });
+        });
+
+    </script>
+}

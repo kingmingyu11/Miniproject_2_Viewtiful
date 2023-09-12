@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Web App</title>
+    <style>
+        /* 전체 페이지 스타일링 */
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('/images/Join_background.jpg'); /* 배경 이미지 설정 */
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* 회원가입 폼 스타일링 */
+        .Join-container {
+            width: 300px;
+            margin: 100px 0 10px 170px; /* 여백 설정 (상, 우, 하, 좌) */
+            padding: 40px;
+            background-color: rgba(0, 0, 0, 0.7); /* 폼 배경 투명도 설정 */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* 그림자 효과 */
+            text-align: left;
+            margin-top: 100px; /* 원하는 여백 크기를 픽셀 단위로 설정하세요 */
+        }
+
+            .Join-container h1 {
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+
+            .Join-container label {
+                display: inline-block; /*display: inline-block;과 width: 150px;를 추가하여 라벨과 입력란이 같은 라인에 정렬되도록 설정*/
+                text-align: left;
+                margin-bottom: 5px;
+                vertical-align: middle; /* 수직 가운데 정렬 추가 */
+            }
+
+            .Join-container input[type="text"],
+            .Join-container input[type="password"],
+            .Join-container input[type="date"] {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+
+            .Join-container input[type="submit"] {
+                background-color: #007BFF;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                padding: 10px;
+                cursor: pointer;
+            }
+
+                .Join-container input[type="submit"]:hover {
+                    background-color: #0056b3;
+                }
+
+            .Join-container .register-link {
+                font-size: 14px;
+                margin-top: 10px;
+            }
+    </style>
+</head>
+<body>
+    <div class="Join-container">
+        <label style="color:wheat; font-family: Gabriola; font-size: 90px; text-align: center; font-weight: bold">Join us!</label>
+
+        @RenderBody()
+
+        <form asp-action="User" method="post">
+            <div>
+                <label for="Address" style="color:white">아이디:</label>
+                <input type="text" id="Address" name="Address" />
+            </div>
+            <div>
+                <label for="Pw" style="color:white">비밀번호:</label>
+                <input type="password" id="Pw" name="Pw" />
+            </div>
+            <div>
+                <label for="Name" style="color:white">이름:</label>
+                <input type="text" id="Name" name="Name" />
+            </div>
+            <div>
+                <label for="Gender" style="color:white">성별:</label>
+                <input type="text" id="Gender" name="Gender" />
+            </div>
+            <div>
+                <label for="Day" style="color:white">생년월일:</label>
+                <input type="date" id="Day" name="Day" />
+            </div>
+            <div>
+                <label for="HP" style="color:white">전화번호:</label>
+                <input type="text" id="HP" name="HP" />
+            </div>
+            <br />
+            <div>
+                <input type="submit" value="회원가입" />
+            </div>
+        </form>
+        <br />
+        <div>
+            <a asp-action="Index" style="color:wheat">뒤로 가기</a>
+        </div>
+        <br />
+        <label style="font-size:20px; font-family: Candara; font-weight: bold; color: red">모두 빠짐없이 입력해주세요.</label>
+    </div>
+</body>
+</html>

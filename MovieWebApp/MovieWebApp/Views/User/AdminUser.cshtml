@@ -1,0 +1,95 @@
+﻿@model IEnumerable<MovieWebApp.Models.User>
+
+@{
+    Layout = "Admin_Layout";
+}
+
+@{
+    ViewData["Title"] = "User";
+}
+<style>
+    #ex1 {
+        font-weight: bold;
+    }
+</style>
+
+<style>
+    body {
+        background-color: black;
+        color: white;
+    }
+
+    table {
+        background-color: #ddd; /* 진한 회색 배경색으로 설정 */
+        color: white; /* 텍스트 색상을 흰색으로 설정 */
+    }
+        /* 마우스를 갖다 댔을 때 행의 배경색 변경 */
+        table tr:hover {
+            background-color: white;
+        }
+
+    }
+</style>
+<h1 class="navbar-brand" id="ex1" style="font-family: Gabriola; font-size: 60px; color: #ff0000; text-align: center;" asp-area="" asp-controller="Home" asp-action="Index">VIEWtiful</h1>
+
+<h1>User</h1>
+
+@* <p>
+    <a asp-action="CreateUser">Create New</a>
+</p> *@
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Pw)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Day)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hp)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pw)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Day)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Hp)
+                </td>
+                <td>
+
+                    @* <a asp-action="UserEdit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="UserDetails" asp-route-id="@item.Id">Details</a> | *@
+                    <a asp-action="AdminUserDelete" asp-route-id="@item.Id" class="btn btn-danger text-white">회원삭제</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

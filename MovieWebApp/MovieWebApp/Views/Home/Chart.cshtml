@@ -1,0 +1,43 @@
+﻿@model List<MovieWebApp.Models.Movie>
+@{
+    Layout = "User_Layout";
+}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<canvas id="movieChart" width="1200" height="400"></canvas>
+
+<script>
+    // 차트 데이터 준비
+    var movieTitles = @Html.Raw(Json.Serialize(Model.Select(m => m.Title)));
+    var views = @Html.Raw(Json.Serialize(Model.Select(m => m.Views)));
+
+    // 차트 생성
+    var ctx = document.getElementById('movieChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'line', // 바 그래프 대신 선 그래프로 변경
+        data: {
+            labels: movieTitles,
+            datasets: [{
+                label: 'Views',
+                data: views,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+                fill: false // 선 그래프에서 데이터 아래를 채우지 않음
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    ticks: {
+                        autoSkip: true,
+                        maxRotation: 0 // 글씨 기울기를 없애려면 maxRotation을 0으로 설정
+                    }
+                },
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>

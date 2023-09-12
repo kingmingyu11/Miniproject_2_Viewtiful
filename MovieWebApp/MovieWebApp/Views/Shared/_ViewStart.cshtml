@@ -1,0 +1,5 @@
+﻿
+@{
+    var userRole = ViewBag.UserRole;
+    Layout = userRole == "Admin" ? "~/Views/Shared/Admin_Layout.cshtml" : "~/Views/Shared/User_Layout.cshtml";
+}

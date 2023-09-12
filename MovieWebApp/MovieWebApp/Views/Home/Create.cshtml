@@ -1,0 +1,68 @@
+﻿@model Movie
+
+@{
+    Layout = "Admin_Layout";
+}
+
+<h1 class="navbar-brand" id="ex1" style="font-family: Gabriola; font-size: 60px; color: #ff0000; text-align: center;" asp-area="" asp-controller="Home" asp-action="Index">VIEWtiful</h1>
+
+<style>
+    body {
+        background-color: black;
+        color: white;
+    }
+</style>
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="Title">영화 제목</label>
+        <br />
+        <input type="text" id="Title" name="Title" class="underline-input" style="background-color: black; color: white; " required>
+    </div>
+    <br />
+    <div class="form-group">
+        <label for="Contents">줄거리</label>
+        <textarea rows="10" id="Contents" name="Contents" class="form-control" required></textarea>
+    </div>
+    <br />
+    <div class="form-group">
+        <label for="Genre">장르</label>
+        <br />
+        <input type="text" id="Genre" name="Genre" class="underline-input" style="background-color: black; color: white; " required>
+    </div>
+    <br />
+    <div class="form-group">
+        <label for="Age">연령가</label>
+        <br />
+        <input type="text" id="Age" name="Age" class="underline-input" style="background-color: black; color: white; " required>
+    </div>
+    <br />
+    <div class="form-group">
+        <label for="Year">연도</label>
+        <br />
+        <input type="number" id="Year" name="Year" class="underline-input" style="background-color: black; color: white; " required>
+    </div>
+    <br />
+    <div class="form-group">
+        <label for="Views">조회수</label>
+        <br />
+        <input type="number" id="Views" name="Views" class="underline-input" style="background-color: black; color: white; " required>
+    </div>
+    <br />
+    <div class="form-group">
+        <label for="Video">영상</label>
+        <input type="file" id="Video" name="Video" class="form-control" accept=".mp4" required>
+    </div>
+    <br />
+    <div class="form-group">
+        <label for="Picture">사진</label>
+        <input type="file" id="Picture" name="Picture" class="form-control" accept=".jpg" required>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-danger">등록</button>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

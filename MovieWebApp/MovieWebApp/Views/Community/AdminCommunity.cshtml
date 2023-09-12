@@ -1,0 +1,82 @@
+﻿@model IEnumerable<MovieWebApp.Models.Community>
+
+@{
+    Layout = "Admin_Layout";
+}
+
+@{
+    ViewData["Title"] = "Community";
+}
+<style>
+    #ex1 {
+        font-weight: bold;
+    }
+</style>
+<style>
+    body {
+        background-color: black;
+        color: white;
+    }
+
+    table {
+        background-color: #ddd; /* 진한 회색 배경색으로 설정 */
+        color: white; /* 텍스트 색상을 흰색으로 설정 */
+    }
+        /* 마우스를 갖다 댔을 때 행의 배경색 변경 */
+        table tr:hover {
+            background-color: white;
+        }
+
+    }
+</style>
+<h1 class="navbar-brand" id="ex1" style="font-family: Gabriola; font-size: 60px; color: #ff0000; text-align: center;" asp-area="" asp-controller="Home" asp-action="Index">VIEWtiful</h1>
+
+<h1>Community</h1>
+
+<p style="text-align: right;">
+    <a asp-action="AdminCreateCommunity" class="btn btn-danger">공지사항등록</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="red-text">
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th class="red-text">
+                @Html.DisplayNameFor(model => model.Contents)
+            </th>
+            <th class="red-text">
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th class="red-text">
+                @Html.DisplayNameFor(model => model.Writer)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="red-text">
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td class="red-text">
+                    @Html.DisplayFor(modelItem => item.Contents)
+                </td>
+                <td class="red-text">
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td class="red-text">
+                    @Html.DisplayFor(modelItem => item.Writer)
+                </td>
+
+                <td class="red-text">
+                    <a asp-action="CommunityEdit" asp-route-id="@item.Id" class="btn btn-dark text-white">수정</a> |
+                    <a asp-action="CommunityDetails" asp-route-id="@item.Id" class="btn btn-dark text-white">조회</a> |
+                    <a asp-action="AdminCommunityDelete" asp-route-id="@item.Id" class="btn btn-dark text-white">삭제</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

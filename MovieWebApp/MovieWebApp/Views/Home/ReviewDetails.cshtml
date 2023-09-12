@@ -1,0 +1,56 @@
+﻿@model Review
+
+@{
+    ViewData["Title"] = "ReviewDetails";
+}
+<style>
+    body {
+        background-color: black;
+        color: white;
+    }
+</style>
+
+<h1 class="navbar-brand" id="ex1" style="font-family: Gabriola; font-size: 60px; color: #ff0000; text-align: center;" asp-area="" asp-controller="Home" asp-action="Index">VIEWtiful</h1>
+
+<div>
+
+    <hr />
+    <dl class="row text-center">
+        <!-- text-center 클래스 추가 -->
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Contents)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Contents)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Writer)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Writer)
+        </dd>
+    </dl>
+</div>
+<hr />
+<div class="text-center">
+    <a asp-action="ReviewEdit" asp-route-id="@Model?.Id" class="btn btn-danger">리뷰 수정</a>
+    <a asp-action="Reviewboard" class="btn btn-light">리뷰목록으로 돌아가기</a>
+</div>

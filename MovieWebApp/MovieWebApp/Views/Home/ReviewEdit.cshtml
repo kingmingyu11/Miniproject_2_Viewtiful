@@ -1,0 +1,70 @@
+﻿@model Review
+
+@{
+    ViewData["Title"] = "ReviewEdit";
+}
+
+<h1 class="navbar-brand" id="ex1" style="font-family: Gabriola; font-size: 60px; color: #ff0000; text-align: center;" asp-area="" asp-controller="Home" asp-action="Home">VIEWtiful</h1>
+<style>
+    body {
+        background-color: black;
+        color: white;
+    }
+</style>
+<hr />
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <form asp-action="ReviewEdit" onsubmit="return confirm('정말 수정하시겠습니까?');">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <br />
+                <input asp-for="Title" class="underline-input" style="background-color: black; color: white; " />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="Contents" class="control-label"></label>
+                <br />
+                <br />
+                <textarea asp-for="Contents" rows="15" cols="100" class="form-control" placeholder="수정할 리뷰 내용을 적어주세요."></textarea>
+                <span asp-validation-for="Contents" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rate" class="control-label"></label>
+                <br />
+                <input asp-for="Rate" class="underline-input" style="background-color: black; color: white; " />
+                <span asp-validation-for="Rate" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <br />
+                <input asp-for="Date" class="underline-input" style="background-color: black; color: white; " />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="Writer" class="control-label"></label>
+                <br />
+                <input asp-for="Writer" class="underline-input" style="background-color: black; color: white; " />
+                <span asp-validation-for="Writer" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group text-center">
+                <input type="submit" value="Save" class="btn btn-danger btn-lg btn-block" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Reviewboard" style="color: white;">리뷰목록으로 돌아가기</a>
+</div>
+<hr />
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

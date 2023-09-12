@@ -1,0 +1,67 @@
+﻿@model Dictionary<string, List<Movie>>
+@{
+    ViewData["Title"] = "Top Movies";
+    <!-- 뷰의 타이틀 수정 -->
+}
+
+<style>
+    table {
+        border-collapse: collapse;
+    }
+
+    tr {
+        height: 50px;
+    }
+
+    td {
+        width: 220px;
+        height: 220px;
+        padding: 20px 20px 0px 20px; /* 셀 안의 컨텐츠와 경계 간격 조절 */
+        text-align: center;
+    }
+
+    img {
+        max-width: 100%; /* 이미지 최대 너비 설정 */
+        max-height: 100%; /* 이미지 최대 높이 설정 */
+    }
+
+    /* 테이블 사이 간격을 조절하는 스타일 */
+    table + table {
+        margin-top: 20px; /* 원하는 간격 크기를 여기에 지정하세요 */
+    }
+</style>
+
+<h1>Top Movies</h1> <!-- 뷰의 제목 수정 -->
+@if (Model.ContainsKey("TopMovies"))
+{
+    <table>
+        <tr>
+            <th>Top 12</th>
+        </tr>
+        <tr>
+            @foreach (var movie in Model["TopMovies"])
+            {
+                <td>
+                    <a href="~/Home/Detail?title=@movie.Title.Replace(" ", "_")">
+                        <!-- 상세정보 페이지로 연결하는 링크 -->
+                        @if (movie.Picture != null && movie.Picture.Length > 0)
+                        {
+                            <img src="data:image/jpeg;base64,@Convert.ToBase64String(movie.Picture)" alt="Movie Picture" />
+                            <br />
+                            <br />
+                        }
+                        else
+                        {
+                            <span>No Picture Available</span>
+                        }
+                        <div style="text-align: center;">@movie.Title</div>
+                    </a>
+                </td>
+            }
+        </tr>
+    </table>
+}
+else
+{
+    <p>No top movies available.</p>
+}

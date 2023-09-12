@@ -1,0 +1,20 @@
+﻿@using Microsoft.AspNetCore.Mvc.ModelBinding;
+@model MovieWebApp.Models.User
+
+@{
+    Layout = "Login_Layout";
+}
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+@* <div class="text-center">
+    <h1 class="display-4">로그인/회원가입</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div> *@
+
+<div class="text-danger">
+    @Html.ValidationSummary()
+</div>

@@ -1,0 +1,153 @@
+﻿@inject MovieDbContext _context
+@model List<MovieWebApp.Models.Movie>
+
+@{   
+        Layout = "Admin_Layout";       
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+
+        #ex1 {
+            font-weight: bold;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        tr {
+            height: 220px;
+        }
+
+        td {
+            height: 100px;
+            padding: 0px 10px 0px 10px; /* 셀 안의 컨텐츠와 경계 간격 조절 */
+            text-align: center;
+        }
+
+        /* a 태그 스타일 정의 */
+        a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* 배너 이미지 스타일 */
+        .banner {
+            max-width: 100%;
+            max-height: 700px; /* 배너 이미지의 최대 높이를 설정하세요 */
+            display: block;
+            margin: 0 auto;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        /* 배너 이미지 숨김 상태 */
+        .hidden {
+            opacity: 0;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    @* <h3 id="ex1" style="font-size:50px">TV 프로그램</h3><br /> *@
+    <a id="bannerLink" href="default-link">
+        <img class="banner" src="" />
+    </a>
+    <br />
+    <h3 id="ex1">VIEWtiful의 인기 콘텐츠</h3>
+    <br />
+    @if (Model != null && Model.Count > 0)
+    {
+        <table>
+            <tr>
+                @{
+                    var movieIndex = 1;
+                }
+                @foreach (var movie in Model)
+                {
+                    var link = "~/images/" + @movieIndex + ".PNG";
+                    <td>
+                        <img src="@Url.Content(link)" style="width: 40px; height:250px;" />
+                    </td>
+                    <td style="vertical-align: top;">
+                        <a href="~/Home/Detail?title=@movie.Title.Replace(" ", "_")">
+                            @if (movie.Picture != null && movie.Picture.Length > 0)
+                            {
+                                <img src="data:image/jpeg;base64,@Convert.ToBase64String(movie.Picture)" alt="Movie Picture" width="180" height="250" />
+                                <br />
+                                <br />
+                            }
+                            else
+                            {
+                                <span>No Picture Available</span>
+                            }
+                            <div style="text-align: center;">@movie.Title</div>
+                        </a>
+                    </td>
+                    movieIndex++;
+                }
+            </tr>
+        </table>
+    }
+    else
+    {
+        <p>No top movies available.</p>
+    }
+    <script>
+        // 이미지 배열
+        var bannerImages = [
+            {
+                src: "@Url.Content("~/images/header1.png")",
+                link: "/Home/Detail?title=마스크걸"
+            },
+            {
+                src: "@Url.Content("~/images/header2.png")",
+                link: "/Home/Detail?title=더 글로리"
+            },
+            {
+                src: "@Url.Content("~/images/header3.png")",
+                link: "/Home/Detail?title=D.P."
+            }
+        ];
+
+        var currentImageIndex = 0;
+
+        // 배너 이미지 요소를 가져옴
+        var banner = document.querySelector(".banner");
+
+        // 배너 이미지 링크 요소를 가져옴
+        var bannerLink = document.querySelector("#bannerLink");
+
+        // 이미지를 변경하는 함수
+        function changeBannerImage() {
+            // 다음 이미지 인덱스 계산
+            currentImageIndex = (currentImageIndex + 1) % bannerImages.length;
+
+            // 이미지와 링크 변경
+            banner.src = bannerImages[currentImageIndex].src;
+            if (bannerLink) {
+                bannerLink.href = bannerImages[currentImageIndex].link;
+            }
+        }
+
+        // 이미지 변경 간격 설정 (여기서는 2초로 설정)
+        var interval = setInterval(changeBannerImage, 2000);
+
+        // 페이지가 로드될 때 첫 번째 이미지로 시작
+        window.addEventListener("load", function () {
+            banner.src = bannerImages[currentImageIndex].src;
+            bannerLink.href = bannerImages[currentImageIndex].link;
+        });
+    </script>
+</body>
+</html>
